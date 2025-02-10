@@ -12,6 +12,7 @@
 .right{
     width: 75vw;
     margin: 16px 0;
+    position: relative;
 }
 
 body{
@@ -48,7 +49,8 @@ body{
     flex-wrap: wrap;
     margin: 30px;
     overflow-y: scroll;
-    max-width: 50vh;
+    max-width: 70vh;
+ 
 }
 
 .card > *{
@@ -66,4 +68,55 @@ body{
     right: 14px;
     opacity: 0;/*hides the element(paly button)*/
     transition: all 1s ease-out;
+}
+
+.signupbtn{
+    background-color:rgb(34 34 34) ;
+    color: rgb(164, 158, 158);
+    border: none;
+    font-weight: bold;
+    outline: none;
+    font-size: 15px;
+    cursor: pointer; /*the pointer icon will become hand*/
+
+}
+
+.signupbtn:hover{
+    font-size: 18px;
+    color: white;
+}
+
+.button > *{
+    margin: 0 12px;
+}
+
+.loginbtn{
+    background-color: white;
+    border-radius: 20px;
+    color: black;
+    font-weight: bold;
+    width: 75px;
+    padding: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.loginbtn:hover{
+    font-weight: bold;
+    font-size: 16px;
+
+}
+
+.playbar{
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(63, 104, 63);
+    width: 100%;
+    padding: 12px;
+}
+
+.songbtn{
+    display: flex;
+    justify-content: center;
+    gap: 10px; 
 }
