@@ -68,14 +68,14 @@
 }
 
 .library{
-    height:75vh;
+    min-height:80vh;
     position: relative;
 }
 .footer{
+    display: flex;
     font-size: 10px;
     color: grey;
-    display: flex;
-    gap: 13px;/*gap bw rows n colums(btw div )*/
+    gap: 13px;
     position: absolute;
     bottom: 0;
     padding: 10px 0;
