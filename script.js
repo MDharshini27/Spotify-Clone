@@ -1,3 +1,5 @@
+let currentSong = new Audio(); 
+
 async function getSongs() {
     let a = await fetch("http://127.0.0.1:5500/songs/")
     let response = await a.text();
@@ -15,7 +17,14 @@ async function getSongs() {
     return songs
 }
 
+const playMusic = (track)=>{
+    currentSong.src = "/songs/" + track
+    currentSong.play(); 
+}
+
 async function main() {
+
+    
     //Get the list of all songs
     let songs = await getSongs()
     console.log(songs)
@@ -36,9 +45,13 @@ async function main() {
         </li> `;
     }
 
-    //Play the first song
-    var audio = new Audio(songs[0]);
-    audio.play();
+    //Attach an event listener to each song
+    Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e=>{
+        e.addEventListener("click",element=>{
+        console.log(e.querySelector(".info").firstElementChild.innerHTML)
+        playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
+    })
+})  
 }
 
 main()
