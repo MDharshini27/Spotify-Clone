@@ -50,6 +50,7 @@ body{
     margin: 30px;
     overflow-y: auto;
     max-width: 70vh;
+    /* justify-content: center; */
  
 }
 
@@ -198,34 +199,88 @@ body{
     padding: 5px 0;
 }
 
+.close{
+    display: none;
+}
+
 .abovebar{
     display: flex;
     justify-content: space-between;
+    margin: 5px 0;
 }
 
-@media (max-width: 1200px) {
+.hamburgercont{
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: flex;
+}
+
+@media (max-width: 1460px) {
     .left {
         position: absolute;
         left: -130%;
         transition: all .3s;
         z-index: 1;
         width: 373px;
-        background-color: red;
+        background-color: black;
         /* padding: 0;
         height: 100vh;
         position: fixed;
         top: 0; */
     }
 
+    .left .close{
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        width: 29px;
+    }
+
     .right{
         width: 100vw;
     }
 
-    .playbar{
-        width: 95vw;
+    .playbar {
+        width: calc(100vw - 75px); 
     }
 
     .hamburger{
         display: block;
     }
+
+    .cardcontainer{
+        justify-content: center;
+        margin: 0;
+    }
+
+    .cardcontainer {
+        max-height: unset;
+        overflow-y: unset;
+        margin-bottom: 35vh;
+    }
+    
+    .card {
+        width: 55vw;
+    }
+
+    .right{
+        margin: 0;
+    }
+
+    .close{
+        display: block;
+    }
+
+    .songinfo,
+    .songtime {
+        width: auto;
+    }
+
+
+    /* .abovebar{
+        flex-direction: column;
+        gap:23px;
+        align-items: center;
+    } */
 }
