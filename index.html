@@ -13,7 +13,7 @@
     <div class="container flex bg-black">
         <div class="left">
             <div class="home bg-grey rounded m-1 p-1">
-                <div class="logo"><img class="invert" src="logo.svg" alt="Spotify"></div>
+                <div class="logo"><img width="30px" class="invert" src="logo.svg" alt="Spotify"></div>
                 <ul>
                     <li> <img class="invert" src="home.svg" alt="Home">Home</li>
                     <li> <img class="invert" src="search.svg" alt="Search"> Search</li>
@@ -29,7 +29,7 @@
 
                 <div class="songList">
                     <ul>
-                    
+
                     </ul>
                 </div>
 
@@ -59,6 +59,9 @@
         <div class="right bg-grey rounded">
             <div class="header">
                 <div class="nav">
+                    <div class="hamburger">
+                        <img src="hamburger.svg" alt="">
+                    </div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000"
                         fill="none">
                         <path d="M15 6C15 6 9.00001 10.4189 9 12C8.99999 13.5812 15 18 15 18" stroke="#ffffff"
@@ -127,13 +130,18 @@
 
                         </div>
                     </div>
-                    <div class="songinfo">
-                        
-                    </div>
-                    <div class="songbtn">
-                        <img src="previous.svg" alt="">
-                        <img src="play.svg" alt="">
-                        <img src="next.svg" alt="">
+                    <div class="abovebar">
+                        <div class="songinfo">
+
+                        </div>
+                        <div class="songbtn">
+                            <img id="previous" src="previous.svg" alt="">
+                            <img id="play" src="play.svg" alt="">
+                            <img id="next" src="next.svg" alt="">
+                        </div>
+                        <div class="songtime">
+
+                        </div>
                     </div>
                 </div>
             </div>

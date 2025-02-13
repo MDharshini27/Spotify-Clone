@@ -1,6 +1,22 @@
-let currentSong = new Audio(); 
+// It initializes currentSong as an Audio object, which allows you to load, play, pause, and control audio files dynamically.
+let currentSong = new Audio();
+
+function secondsToMinutesSeconds(seconds) {
+    if (isNaN(seconds) || seconds < 0) {
+        return "00:00";
+    }
+
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+}
 
 async function getSongs() {
+
     let a = await fetch("http://127.0.0.1:5500/songs/")
     let response = await a.text();
     console.log(response)
@@ -17,17 +33,22 @@ async function getSongs() {
     return songs
 }
 
-const playMusic = (track)=>{
-    currentSong.src = "/songs/" + track
-    currentSong.play(); 
+const playMusic = (track, pause=false) => {
+    currentSong.src = "/songs/" + track + ".mp3"
+    if(!pause){
+        currentSong.play();
+        play.src = "pause.svg"
+    }
+    console.log(pause)
+    document.querySelector(".songinfo").innerHTML = track
+    document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
 }
 
 async function main() {
 
-    
     //Get the list of all songs
     let songs = await getSongs()
-    console.log(songs)
+    playMusic(songs[0], true)
 
     //show  all the songs in the playlist
     let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0]
@@ -46,12 +67,39 @@ async function main() {
     }
 
     //Attach an event listener to each song
-    Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e=>{
-        e.addEventListener("click",element=>{
-        console.log(e.querySelector(".info").firstElementChild.innerHTML)
-        playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
+    Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e => {
+        e.addEventListener("click", element => {
+            console.log(e.querySelector(".info").firstElementChild.innerHTML)
+            playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
+        })
     })
-})  
+
+    //Add an event listner to play,next,previous
+    play.addEventListener("click", () => {
+        if (currentSong.paused) {
+            currentSong.play()
+            play.src = "pause.svg"
+        }
+        else {
+            currentSong.pause()
+            play.src = "play.svg"
+        }
+    })
+
+    //Listen for timeupdate event
+    currentSong.addEventListener("timeupdate", () => {
+        console.log(currentSong.currentTime, currentSong.duration)
+        document.querySelector(".songtime").innerHTML = `${ secondsToMinutesSeconds(currentSong.currentTime)}:${ secondsToMinutesSeconds(currentSong.duration)}`
+        document.querySelector(".circle").style.left = (currentSong.currentTime / currentSong.duration)* 100 + "%";
+    })
+
+    // Add an event listener to seekbar
+    document.querySelector(".seekbar").addEventListener("click", e => {
+        let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
+        document.querySelector(".circle").style.left = percent + "%";
+        currentSong.currentTime = ((currentSong.duration) * percent) / 100
+    })
+
 }
 
 main()

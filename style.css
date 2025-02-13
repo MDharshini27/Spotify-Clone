@@ -123,10 +123,15 @@ body{
     display: flex;
     justify-content: center;
     gap: 10px; 
+    cursor: pointer;
 }
 
 .songList ul{
     padding: 0 12px;
+}
+
+.hamburger{
+    display: none;
 }
 
 .songList ul li{
@@ -168,7 +173,7 @@ body{
 }
 
 .seekbar{
-    height: 2px;
+    height: 4px;
     width: 99%;
     background:  black;
     position: absolute;
@@ -186,4 +191,41 @@ body{
     bottom: 6px;
     left: 0%;
     transition: left 0.5s;
+}
+
+.songinfo , .songtime{
+    color: black;
+    padding: 5px 0;
+}
+
+.abovebar{
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 1200px) {
+    .left {
+        position: absolute;
+        left: -130%;
+        transition: all .3s;
+        z-index: 1;
+        width: 373px;
+        background-color: red;
+        /* padding: 0;
+        height: 100vh;
+        position: fixed;
+        top: 0; */
+    }
+
+    .right{
+        width: 100vw;
+    }
+
+    .playbar{
+        width: 95vw;
+    }
+
+    .hamburger{
+        display: block;
+    }
 }
