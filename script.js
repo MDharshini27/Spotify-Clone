@@ -1,6 +1,7 @@
 // It initializes currentSong as an Audio object, which allows you to load, play, pause, and control audio files dynamically.
 let currentSong = new Audio();
 let songs;
+let currfolder;
 
 function secondsToMinutesSeconds(seconds) {
     if (isNaN(seconds) || seconds < 0) {
@@ -16,9 +17,9 @@ function secondsToMinutesSeconds(seconds) {
     return `${formattedMinutes}:${formattedSeconds}`;
 }
 
-async function getSongs() {
-
-    let a = await fetch("http://127.0.0.1:5500/songs/")
+async function getSongs(folder) {
+    currfolder=folder;
+    let a = await fetch(`http://127.0.0.1:5500/${folder}/`)
     let response = await a.text();
     console.log(response)
     let div = document.createElement("div")
@@ -28,14 +29,14 @@ async function getSongs() {
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
         if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split("/songs/")[1].replaceAll("%20", " ").split(".")[0])
+            songs.push(element.href.split(`/${folder}/`)[1].replaceAll("%20", " ").split(".")[0])
         }
     }
     return songs
 }
 
 const playMusic = (track, pause=false) => {
-    currentSong.src = "/songs/" + track + ".mp3"
+    currentSong.src = `/${currfolder}/` + track + ".mp3"
     if(!pause){
         currentSong.play();
         play.src = "pause.svg"
@@ -48,7 +49,7 @@ const playMusic = (track, pause=false) => {
 async function main() {
 
     //Get the list of all songs
-    songs = await getSongs()
+    songs = await getSongs("songs/ncs")
     playMusic(songs[0], true)
 
     //show  all the songs in the playlist
