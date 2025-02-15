@@ -1,3 +1,7 @@
+:root{
+    --a:0;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -41,6 +45,7 @@ body{
     padding: 10px;
     border-radius: 5px;
     position: relative;
+    transition: all .9s;
 }
 
 .cardcontainer{
@@ -54,6 +59,12 @@ body{
  
 }
 
+.card:hover{
+    background-color: rgb(85, 82, 82);
+    cursor: pointer;
+    --a: 1;
+}
+
 .card > *{
     padding-top: 10px;
 }
@@ -64,12 +75,23 @@ body{
 }
 
 .play{
+    top: 195px;
+    width: 28px;
+    height: 28px;
+    background-color: #1fdf64;
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
-    top: 162px;
-    right: 14px;
-    opacity: 0;/*hides the element(paly button)*/
+    bottom: 88px;
+    right: 10px;
+    opacity: var(--a);
     transition: all 1s ease-out;
 }
+
+
 
 .signupbtn{
     background-color:rgb(34 34 34) ;
@@ -117,7 +139,7 @@ body{
     width: 70vw;
     padding: 12px;
     margin-right: 150px;
-    height: 40px;
+    min-height: 40px;
 }
 
 .songbtn{
@@ -283,4 +305,10 @@ body{
         gap:23px;
         align-items: center;
     } */
+}
+
+@media (max-width: 500px) {
+    .card {
+        width: 100%;
+    }
 }

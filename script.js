@@ -1,5 +1,6 @@
 // It initializes currentSong as an Audio object, which allows you to load, play, pause, and control audio files dynamically.
 let currentSong = new Audio();
+let songs;
 
 function secondsToMinutesSeconds(seconds) {
     if (isNaN(seconds) || seconds < 0) {
@@ -47,7 +48,7 @@ const playMusic = (track, pause=false) => {
 async function main() {
 
     //Get the list of all songs
-    let songs = await getSongs()
+    songs = await getSongs()
     playMusic(songs[0], true)
 
     //show  all the songs in the playlist
@@ -105,9 +106,29 @@ async function main() {
         document.querySelector(".left").style.left ="0"
     })
 
-    //Add eventlistner for close
+    //Add an event listner for close
     document.querySelector(".close").addEventListener("click", ()=>{
         document.querySelector(".left").style.left ="-110%"
+    })
+
+    //Add an event listner for previous
+    previous.addEventListener("click", () => {
+        console.log("Next Clicked")
+        
+        let index =  songs.indexOf(currentSong.src.split("/songs/")[1].replaceAll("%20", " ").split(".")[0] )
+        console.log(index)
+        if((index-1) >= 0){
+            playMusic(songs[index-1])
+        }
+    })
+
+    //Add an event listner to next
+    next.addEventListener("click", () => {   
+        let index =  songs.indexOf(currentSong.src.split("/songs/")[1].replaceAll("%20", " ").split(".")[0] )
+        console.log(index)
+        if((index+1) < songs.length){
+            playMusic(songs[index+1])
+        }
     })
 }
 
