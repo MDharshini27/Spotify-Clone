@@ -55,6 +55,7 @@ body{
     gap: 10px;
     flex-wrap: wrap;
     margin: 30px;
+    /* left: 100px; */
     overflow-y: auto;
     width: 100%;
     /* justify-content: center; */
