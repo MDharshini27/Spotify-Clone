@@ -21,7 +21,7 @@ async function getSongs(folder) {
     currfolder=folder;
     let a = await fetch(`http://127.0.0.1:5500/${folder}/`)
     let response = await a.text();
-    console.log(response)
+    // console.log(response)
     let div = document.createElement("div")
     div.innerHTML = response;
     let as = div.getElementsByTagName("a")
@@ -68,7 +68,7 @@ const playMusic = (track, pause=false) => {
         currentSong.play();
         play.src = "pause.svg"
     }
-    console.log(pause)
+    // console.log(pause)
     document.querySelector(".songinfo").innerHTML = track
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
 
@@ -84,15 +84,17 @@ async function displayAlbums( ) {
     let anchors = div.getElementsByTagName("a")
     let cardcontainer = document.querySelector(".cardcontainer")
     let array = Array.from(anchors)
+    // console.log(array)
         for(let index = 0; index < array.length; index++){
             const e = array[index];
-          if(e.href.includes("/songs")){
-            let folder = e.href.split("/").slice(-1)[0] //doubt 
+          if(e.href.includes("/songs") && e.href.split("/").slice(-1)[0] !== "songs" ){
+            let folder = e.href.split("/").slice(-1)
+            // console.log(folder)
             //Get the metadata of the folder
             let a = await fetch(`http://127.0.0.1:5500/songs/${folder}/info.json`)
             let response = await a.json();
-            console.log(response)
-            cardcontainer.innerHTML = cardcontainer.innerHTML + `<div data-folder="cs" class="card">
+            // console.log(response)
+            cardcontainer.innerHTML = cardcontainer.innerHTML + `<div data-folder="${folder}" class="card">
                         <div  class="play">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" viewBox="0 0 50 50">
                                 <!-- Green Circular Background -->
@@ -118,7 +120,7 @@ async function displayAlbums( ) {
     // Load the playlist whenever card is clicked
      Array.from(document.getElementsByClassName("card")).forEach(e => { 
         e.addEventListener("click", async item => {
-            console.log(item.target, item.target.dataset)
+            console.log(item.target,item.target.dataset)
             songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`)  
             // playMusic(songs[0])
 
@@ -150,7 +152,7 @@ async function main() {
 
     //Listen for timeupdate event
     currentSong.addEventListener("timeupdate", () => {
-        console.log(currentSong.currentTime, currentSong.duration)
+        // console.log(currentSong.currentTime, currentSong.duration)
         document.querySelector(".songtime").innerHTML = `${ secondsToMinutesSeconds(currentSong.currentTime)}:${ secondsToMinutesSeconds(currentSong.duration)}`
         document.querySelector(".circle").style.left = (currentSong.currentTime / currentSong.duration)* 100 + "%";
     })
@@ -174,10 +176,10 @@ async function main() {
 
     //Add an event listner for previous
     previous.addEventListener("click", () => {
-        console.log("Next Clicked")
+        // console.log("Next Clicked")
         
         let index =  songs.indexOf(currentSong.src.split(`/${currfolder}/`)[1].replaceAll("%20", " ").split(".")[0] )
-        console.log(index)
+        // console.log(index)
         if((index-1) >= 0){
             playMusic(songs[index-1])
         }

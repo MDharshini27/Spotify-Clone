@@ -5,12 +5,14 @@
 *{
     margin: 0;
     padding: 0;
+    /* overflow-x: hidden; */
 }
 
 /*to create left side*/
 .left{
     width: 25vw;
     padding: 10px;
+ 
 }
 
 .right{
@@ -147,6 +149,8 @@ body{
     justify-content: center;
     gap: 10px; 
     cursor: pointer;
+    position: fixed;
+    left: 32vw;
 }
 
 .songList ul{
@@ -190,7 +194,7 @@ body{
 }
 
 .songList{
-    height: 444px;
+    height: 380px;
     overflow: auto;
     margin-bottom: 44px;
 }
@@ -220,6 +224,8 @@ body{
     color: black;
     padding: 5px 0;
 }
+
+
 
 .close{
     display: none;
