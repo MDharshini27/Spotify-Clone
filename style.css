@@ -54,7 +54,7 @@ body{
     flex-wrap: wrap;
     margin: 30px;
     overflow-y: auto;
-    max-width: 70vh;
+    width: 100%;
     /* justify-content: center; */
  
 }
